@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="607.0" prefWidth="846.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="587.0" prefWidth="689.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pregão da B3" wrappingWidth="79.37109375">
          <VBox.margin>
@@ -14,12 +14,21 @@
          </VBox.margin>
       </Text>
       <AmbientLight color="CHARTREUSE" lightOn="true" />
-      <TextField text="login" />
-      <PasswordField prefHeight="30.0" prefWidth="771.0" text="12345678" />
-      <Button mnemonicParsing="false" prefHeight="51.0" prefWidth="75.0" text="Entrar">
+      <TextField prefHeight="25.0" prefWidth="700.0" text="login">
          <VBox.margin>
-            <Insets bottom="40.0" left="350.0" top="400.0" />
+            <Insets top="40.0" />
+         </VBox.margin></TextField>
+      <PasswordField prefHeight="30.0" prefWidth="660.0" text="12345678">
+         <VBox.margin>
+            <Insets top="30.0" />
+         </VBox.margin></PasswordField>
+      <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="75.0" text="Entrar">
+         <VBox.margin>
+            <Insets bottom="302.0" left="302.0" right="302.0" top="302.0" />
          </VBox.margin>
+         <font>
+            <Font name="Ebrima" size="13.0" />
+         </font>
       </Button>
    </children>
 </VBox>
