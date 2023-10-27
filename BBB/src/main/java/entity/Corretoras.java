@@ -3,17 +3,21 @@ package entity;
 public class Corretoras {
 
     private Integer idCorretoras;
-    private Integer CNPJ;
+    private String CNPJ;
     private String Nome;
     private String RazaoSocial;
     private String Telefone;
 
-    public Corretoras(Integer idCorretoras, Integer CNPJ, String nome, String razaoSocial, String telefone) {
+    public Corretoras(Integer idCorretoras, String CNPJ, String nome, String razaoSocial, String telefone) {
         this.idCorretoras = idCorretoras;
         this.CNPJ = CNPJ;
         Nome = nome;
         RazaoSocial = razaoSocial;
         Telefone = telefone;
+    }
+
+    public Corretoras() {
+
     }
 
     public Integer getIdCorretoras() {
@@ -24,11 +28,11 @@ public class Corretoras {
         this.idCorretoras = idCorretoras;
     }
 
-    public Integer getCNPJ() {
+    public String getCNPJ() {
         return CNPJ;
     }
 
-    public void setCNPJ(Integer CNPJ) {
+    public void setCNPJ(String CNPJ) {
         this.CNPJ = CNPJ;
     }
 
@@ -58,12 +62,10 @@ public class Corretoras {
 
     @Override
     public String toString() {
-        return "Corretoras{" +
-                "idCorretoras=" + idCorretoras +
-                ", CNPJ=" + CNPJ +
-                ", Nome='" + Nome + '\'' +
-                ", RazaoSocial='" + RazaoSocial + '\'' +
-                ", Telefone='" + Telefone + '\'' +
-                '}';
+        return "Dados da corretora:\n"+
+                "Nome Corretora: "+ Nome +
+                "\nCNPJ: " + CNPJ +
+                "\nRazaoSocial: " + RazaoSocial +
+                "\nTelefone: " + Telefone;
     }
 }

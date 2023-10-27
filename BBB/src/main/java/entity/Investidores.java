@@ -4,13 +4,13 @@ public class Investidores {
 
     private Integer id_investidor;
     private String Nome;
-    private Integer CPF;
+    private String CPF;
     private String NomeUsuario;
     private String Senha;
-    private Integer Telefone;
+    private String Telefone;
     private String Email;
 
-    public Investidores(Integer id_investidor, String nome, Integer CPF, String nomeUsuario, String senha, Integer telefone, String email) {
+    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email) {
         this.id_investidor = id_investidor;
         Nome = nome;
         this.CPF = CPF;
@@ -18,6 +18,10 @@ public class Investidores {
         Senha = senha;
         Telefone = telefone;
         Email = email;
+    }
+
+    public Investidores() {
+
     }
 
     public Integer getId_investidor() {
@@ -36,11 +40,11 @@ public class Investidores {
         Nome = nome;
     }
 
-    public Integer getCPF() {
+    public String getCPF() {
         return CPF;
     }
 
-    public void setCPF(Integer CPF) {
+    public void setCPF(String CPF) {
         this.CPF = CPF;
     }
 
@@ -60,11 +64,11 @@ public class Investidores {
         Senha = senha;
     }
 
-    public Integer getTelefone() {
+    public String getTelefone() {
         return Telefone;
     }
 
-    public void setTelefone(Integer telefone) {
+    public void setTelefone(String telefone) {
         Telefone = telefone;
     }
 
@@ -78,14 +82,11 @@ public class Investidores {
 
     @Override
     public String toString() {
-        return "Investidores{" +
-                "id_investidor=" + id_investidor +
-                ", Nome='" + Nome + '\'' +
-                ", CPF=" + CPF +
-                ", NomeUsuario='" + NomeUsuario + '\'' +
-                ", Senha='" + Senha + '\'' +
-                ", Telefone=" + Telefone +
-                ", Email='" + Email + '\'' +
-                '}';
+        return "Seus dados foram definidos assim:\n" +
+                "\nNome " + Nome +
+                "\nCPF: " + CPF +
+                "\nNome de usuário: " + NomeUsuario +
+                "\nTelefone:  " + Telefone +
+                "\nEmail: " + Email ;
     }
 }
