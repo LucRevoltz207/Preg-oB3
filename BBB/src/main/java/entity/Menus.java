@@ -8,7 +8,7 @@ public class Menus {
     }
     public static void MenuCorretora(){
         Scanner s = new Scanner(System.in);
-        System.out.println("O que deseja fazer?\n[1] Alterar valor de Ativo\n [2] Registrar Ação \n[3] Excluir Ação");
+        System.out.println("O que deseja fazer?\n[1] Alterar valor de Ativo\n[2] Registrar Ação \n[3] Excluir Ação");
         int opc = s.nextByte();
         switch (opc){
             case 1: CMudarValorAtivo();
@@ -19,7 +19,7 @@ public class Menus {
     }
     public static void MenuInvestidor(){
         Scanner s = new Scanner(System.in);
-        System.out.println("O que deseja fazer?\n[1] Comprar Ações\n [2] Vender Ações \n[3] Ver minhas ações");
+        System.out.println("O que deseja fazer?\n[1] Comprar Ações\n[2] Vender Ações \n[3] Ver minhas ações");
         int opc = s.nextByte();
         switch (opc){
             case 1: ICompraAcao();

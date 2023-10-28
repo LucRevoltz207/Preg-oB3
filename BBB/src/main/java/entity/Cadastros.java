@@ -12,11 +12,15 @@ public class Cadastros {
         System.out.println("Primeiro cadastro");
         System.out.println("Você é um(a): [1] Pessoa [2] Empresa");
         int opc = scan.nextByte();
+        //Verifica se o usuario é uma pessoa ou Empresa, para que se diferencie as perguntar e seja mais espeecifico
         if (opc == 1) {
 
             CadastroPessoa();
+            //chama o metodo que cadastra pessoa
         } else {
             CadastroCorretora();
+
+            //chama o metodo que cadastra corretoras
         }
     }
 
@@ -37,7 +41,12 @@ public class Cadastros {
         System.out.print("Digite seu melhor email: ");
         i.setEmail(value.nextLine());
         System.out.println("Cadastro Concluido!");
-        System.out.println(i.toString());
+        System.out.println(i);
+        System.out.println("Digite qualquer tecla para avançar");
+        value.nextByte();
+
+
+        Menus.MenuInvestidor();//Chama a função que da ao usuario a possibilidade de alterar sua carteira
     }
     public static void CadastroCorretora(){
         Corretoras c = new Corretoras();
@@ -47,10 +56,14 @@ public class Cadastros {
         System.out.print("CNPJ: ");
         c.setCNPJ(value.nextLine());
         System.out.print("Telefone: ");
-        c.setTelefone(value.next());
+        c.setTelefone(value.nextLine());
         System.out.print("Razão social: ");
-        c.setRazaoSocial(value.next());
+        c.setRazaoSocial(value.nextLine());
         System.out.println("\nCorretora cadastrada!");
-        System.out.println(c.toString());
+        System.out.println(c);
+        System.out.println("Digite qualquer tecla para avançar");
+        value.nextByte();
+
+        Menus.MenuCorretora();//chama a função para que as empresas possam fazer alterações nas ações
     }
 }
