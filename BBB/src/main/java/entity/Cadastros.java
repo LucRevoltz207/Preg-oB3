@@ -43,7 +43,7 @@ public class Cadastros {
         System.out.println("Cadastro Concluido!");
         System.out.println(i);
         System.out.println("Digite qualquer tecla para avançar");
-        value.nextByte();
+        value.next();
 
 
         Menus.MenuInvestidor();//Chama a função que da ao usuario a possibilidade de alterar sua carteira
@@ -59,10 +59,10 @@ public class Cadastros {
         c.setTelefone(value.nextLine());
         System.out.print("Razão social: ");
         c.setRazaoSocial(value.nextLine());
-        System.out.println("\nCorretora cadastrada!");
+        System.out.println("\nEmpresa cadastrada!");
         System.out.println(c);
         System.out.println("Digite qualquer tecla para avançar");
-        value.nextByte();
+        value.next();
 
         Menus.MenuCorretora();//chama a função para que as empresas possam fazer alterações nas ações
     }

@@ -1,8 +1,10 @@
 package entity;
 
-public class Main {
-    public static void main(String[] args) {
-        Cadastros c = new Cadastros();
+import java.io.IOException;
 
+public class Main {
+    public static void main(String[] args) throws IOException {
+        Cadastros.CadastroMain();
+        Relatorio r = new Relatorio();
     }
 }

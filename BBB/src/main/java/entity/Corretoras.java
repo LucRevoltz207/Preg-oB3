@@ -62,10 +62,10 @@ public class Corretoras {
 
     @Override
     public String toString() {
-        return "Dados da corretora:\n"+
-                "Nome Corretora: "+ Nome +
+        return "Dados da Empresa:\n"+
+                "Nome Empresa: "+ Nome +
                 "\nCNPJ: " + CNPJ +
-                "\nRazaoSocial: " + RazaoSocial +
+                "\nRazao Social: " + RazaoSocial +
                 "\nTelefone: " + Telefone;
     }
 }
