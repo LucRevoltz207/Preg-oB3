@@ -15,6 +15,17 @@ public class Relatorio {
 
             Files.writeString(path, texto);
 
+
+        }
+
+        public static void RelatorioAcoes(){
+
+        }
+        public static void RelatorioCarteira(){
+
+        }
+        public static void RelatorioCompra(){
+
         }
 
     }

@@ -28,6 +28,9 @@
         <mapping class="entity.Acao" />
         <mapping class="entity.Investidores" />
         <mapping class="entity.Corretoras" />
+        <mapping class="entity.FII" />
+
+
 
     </session-factory>
 </hibernate-configuration>

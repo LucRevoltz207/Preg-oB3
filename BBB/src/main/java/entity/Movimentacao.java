@@ -1,5 +1,9 @@
 package entity;
 
+import entity.Acao;
+import entity.Corretoras;
+import entity.Investidores;
+
 public class Movimentacao {
 
     private Integer idMovimentacao;

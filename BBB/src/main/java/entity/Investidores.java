@@ -1,13 +1,29 @@
 package entity;
 
+
+import jakarta.persistence.*;
+
+@Entity (name = "Investidores")
+@Table (name = "Investidores")
+
+
+
 public class Investidores {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
 
     private Integer id_investidor;
+    @Column
     private String Nome;
+    @Column
     private String CPF;
+    @Column
     private String NomeUsuario;
+    @Column
     private String Senha;
+    @Column
     private String Telefone;
+    @Column
     private String Email;
 
     public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email) {

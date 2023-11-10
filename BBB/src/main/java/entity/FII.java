@@ -1,6 +1,12 @@
 package entity;
+import jakarta.persistence.*;
+
+    @Entity (name = "Investidores")
+    @Table (name = "Investidores")
+
 
 public class FII {
+        @Column
     private int quantidadeCotas;
 
     public FII(String codigo, String nome, double valorAtual, int quantidadeCotas) {
