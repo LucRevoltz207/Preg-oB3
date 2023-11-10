@@ -14,7 +14,11 @@ public class FII {
         this.quantidadeCotas = quantidadeCotas;
     }
 
-    public int getQuantidadeCotas() {
+        public FII() {
+
+        }
+
+        public int getQuantidadeCotas() {
         return quantidadeCotas;
     }
 

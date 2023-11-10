@@ -3,14 +3,11 @@ package entity;
 
 import jakarta.persistence.*;
 
-@Entity (name = "Investidores")
-@Table (name = "Investidores")
+
 
 
 
 public class Investidores {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
 
     private Integer id_investidor;
     @Column

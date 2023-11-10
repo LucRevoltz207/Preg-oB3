@@ -7,30 +7,26 @@ package entity;
         import java.util.Scanner;
         import jakarta.persistence.*;
 
-@Entity (name = "Acao")
-@Table (name = "Acao")
 
 
 public class Acao {
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Id
     private Integer idAcao;
 
-    @Column
+
     private String ticker;
-    @Column
+
     private String nomeAcao;
-    @Column
+
     private Double variacaoValor;
-    @Column
+
     private Investidores DonoAcao;
     private FII Ativo;
 
     // Lista para armazenar as ações em heap
     private static List<Acao> listaAcoes = new ArrayList<>();
 
-    public Acao(Integer idAcao, String ticker, String nomeAcao, Double variacaoValor,Investidores donoAcao) {
+    public Acao(Integer idAcao, String ticker, String nomeAcao, Double variacaoValor,Investidores donoAcao, FII ativo) {
         this.idAcao = idAcao;
         this.ticker = ticker;
         this.nomeAcao = nomeAcao;
@@ -61,7 +57,7 @@ public class Acao {
         double variacaoValor = scanner.nextDouble();
 
 
-        Acao acao = new Acao(idAcao, ticker, nomeAcao, variacaoValor, new Investidores());
+        Acao acao = new Acao(idAcao, ticker, nomeAcao, variacaoValor, new Investidores(),new FII());
 
         // Adiciona a ação à lista em heap
         listaAcoes.add(acao);

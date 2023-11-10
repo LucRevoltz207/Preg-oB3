@@ -2,7 +2,7 @@ package entity;
     import jakarta.persistence.*;
 
 @Entity (name = "Corretoras")
-@Table (name = "Corretoras")
+@Table
 
 
 public class Corretoras {
