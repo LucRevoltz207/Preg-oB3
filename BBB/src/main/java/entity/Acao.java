@@ -1,6 +1,10 @@
 package entity;
 
-import java.util.Scanner;
+        import java.io.IOException;
+        import java.util.ArrayList;
+        import java.util.Iterator;
+        import java.util.List;
+        import java.util.Scanner;
 
 public class Acao {
 
@@ -9,21 +13,24 @@ public class Acao {
     private String nomeAcao;
     private Double variacaoValor;
 
-    public Acao(Integer idAcao, String ticker, String nomeAcao, Double variacaoValor) {
+    private Investidores DonoAcao;
+
+    // Lista para armazenar as ações em heap
+    private static List<Acao> listaAcoes = new ArrayList<>();
+
+    public Acao(Integer idAcao, String ticker, String nomeAcao, Double variacaoValor,Investidores donoAcao) {
         this.idAcao = idAcao;
         this.ticker = ticker;
         this.nomeAcao = nomeAcao;
         this.variacaoValor = variacaoValor;
+        this.DonoAcao = null;
+
     }
 
     public Acao() {
-
     }
 
-    public void addAcao(){
-
-
-        ArvoreBinariaAcoes arvore = new ArvoreBinariaAcoes();
+    public static void addAcao() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Adicione informações da Ação:");
@@ -40,14 +47,88 @@ public class Acao {
         System.out.print("Variação de Valor: ");
         double variacaoValor = scanner.nextDouble();
 
-        Acao acao = new Acao(idAcao, ticker, nomeAcao, variacaoValor);
-        arvore.inserir(acao);
 
-        System.out.println("Ação na árvore (em ordem):");
-        arvore.emOrdem();
+        Acao acao = new Acao(idAcao, ticker, nomeAcao, variacaoValor, new Investidores());
 
-        Menus m = new Menus();
-        m.MenuCorretora();
+        // Adiciona a ação à lista em heap
+        listaAcoes.add(acao);
+
+        System.out.println("Ação adicionada com sucesso!");
+
+        // Exibe todas as ações adicionadas
+        exibirTodasAcoes();
+
+
+        Menus.MenuCorretora();
+    }
+
+    // Método para exibir todas as ações adicionadas
+    public static void exibirTodasAcoes() {
+        System.out.println("Ações adicionadas:");
+        for (Acao acao : listaAcoes) {
+            System.out.println(acao);
+        }
+    }
+    // Método para excluir uma ação com base no ID
+    public static void excluirAcao() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Informe o ID da Ação a ser excluída: ");
+        int idAcaoParaExcluir = scanner.nextInt();
+
+        Iterator<Acao> iterator = listaAcoes.iterator();
+        boolean encontrou = false;
+
+        while (iterator.hasNext()) {
+            Acao acao = iterator.next();
+            if (acao.getIdAcao().equals(idAcaoParaExcluir)) {
+                iterator.remove();
+                encontrou = true;
+                System.out.println("Ação excluída com sucesso!");
+                break;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Ação não encontrada com o ID informado.");
+        }
+        try {
+            Menus.MenuCorretora();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void mudarValorAtivo() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Informe o ID da Ação cujo valor deve ser alterado: ");
+        int idAcaoParaAlterar = scanner.nextInt();
+
+        Iterator<Acao> iterator = listaAcoes.iterator();
+        boolean encontrou = false;
+
+        while (iterator.hasNext()) {
+            Acao acao = iterator.next();
+            if (acao.getIdAcao().equals(idAcaoParaAlterar)) {
+                System.out.print("Informe o novo valor para a Ação: ");
+                double novoValor = scanner.nextDouble();
+                acao.setVariacaoValor(novoValor);
+                encontrou = true;
+                System.out.println("Valor da Ação alterado com sucesso!");
+                break;
+            }
+        }
+        Menus.MenuCorretora();
+    }
+
+        @Override
+    public String toString() {
+        return "Ativo " +
+                "\n Id =" + idAcao +
+                "\n Ticker ='" + ticker + '\'' +
+                "\n Nome Acao ='" + nomeAcao + '\'' +
+                "\n Variacao Valor =" + variacaoValor +
+                '\n';
     }
 
     public Integer getIdAcao() {
@@ -82,92 +163,19 @@ public class Acao {
         this.variacaoValor = variacaoValor;
     }
 
-    @Override
-    public String toString() {
-        return "Acao{" +
-                "idAcao=" + idAcao +
-                ", ticker='" + ticker + '\'' +
-                ", nomeAcao='" + nomeAcao + '\'' +
-                ", variacaoValor=" + variacaoValor +
-                '}';
+    public static List<Acao> getListaAcoes() {
+        return listaAcoes;
+    }
+
+    public static void setListaAcoes(List<Acao> listaAcoes) {
+        Acao.listaAcoes = listaAcoes;
+    }
+
+    public Investidores getDonoAcao() {
+        return DonoAcao;
+    }
+
+    public void setDonoAcao(Investidores donoAcao) {
+        DonoAcao = donoAcao;
     }
 }
-
-class NoAcao {
-    private Acao acao;
-    private NoAcao esquerda;
-    private NoAcao direita;
-
-    public NoAcao(Acao acao) {
-        this.acao = acao;
-        this.esquerda = null;
-        this.direita = null;
-    }
-
-    public NoAcao() {
-
-    }
-
-    public Acao getAcao() {
-        return acao;
-    }
-
-    public NoAcao getEsquerda() {
-        return esquerda;
-    }
-
-    public void setEsquerda(NoAcao esquerda) {
-        this.esquerda = esquerda;
-    }
-
-    public NoAcao getDireita() {
-        return direita;
-    }
-
-    public void setDireita(NoAcao direita) {
-        this.direita = direita;
-    }
-}
-
-class ArvoreBinariaAcoes {
-    private NoAcao raiz;
-
-    public ArvoreBinariaAcoes() {
-        this.raiz = null;
-    }
-
-    public void inserir(Acao acao) {
-        raiz = inserirRec(raiz, acao);
-    }
-
-    private NoAcao inserirRec(NoAcao raiz, Acao acao) {
-        if (raiz == null) {
-            raiz = new NoAcao(acao);
-            return raiz;
-        }
-
-        if (acao.getIdAcao() < raiz.getAcao().getIdAcao()) {
-            raiz.setEsquerda(inserirRec(raiz.getEsquerda(), acao));
-        } else if (acao.getIdAcao() > raiz.getAcao().getIdAcao()) {
-            raiz.setDireita(inserirRec(raiz.getDireita(), acao));
-        }
-
-        return raiz;
-    }
-
-    // Você pode adicionar métodos para busca, remoção e outras operações na árvore, se necessário.
-
-    // Exemplo de um método para imprimir a árvore em ordem (percurso em ordem):
-    public void emOrdem() {
-        emOrdemRec(raiz);
-    }
-
-    private void emOrdemRec(NoAcao raiz) {
-        if (raiz != null) {
-            emOrdemRec(raiz.getEsquerda());
-            System.out.println(raiz.getAcao());
-            emOrdemRec(raiz.getDireita());
-        }
-    }
-}
-

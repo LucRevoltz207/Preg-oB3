@@ -1,5 +1,6 @@
 package entity;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Cadastros {
@@ -17,12 +18,17 @@ public class Cadastros {
 
             CadastroPessoa();
             //chama o metodo que cadastra pessoa
-        } else {
-            CadastroCorretora();
+        } else if (opc==2) {
+            CadastroCorretora();}
+                else {
+            System.out.println("Opção invalida");
+            CadastroMain();
+        }
+
 
             //chama o metodo que cadastra corretoras
         }
-    }
+
 
     public static void CadastroPessoa(){
         Investidores i = new Investidores();
@@ -59,11 +65,15 @@ public class Cadastros {
         c.setTelefone(value.nextLine());
         System.out.print("Razão social: ");
         c.setRazaoSocial(value.nextLine());
-        System.out.println("\nEmpresa cadastrada!");
+        System.out.println("\nCorretora cadastrada!");
         System.out.println(c);
         System.out.println("Digite qualquer tecla para avançar");
         value.next();
 
-        Menus.MenuCorretora();//chama a função para que as empresas possam fazer alterações nas ações
+        try {
+            Menus.MenuCorretora();//chama a função para que as corretoras possam fazer alterações nas ações
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

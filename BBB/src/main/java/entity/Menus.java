@@ -1,13 +1,15 @@
 package entity;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Menus {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         MenuCorretora();
     }
-    public static void MenuCorretora(){
+    public static void MenuCorretora() throws IOException {
         Scanner s = new Scanner(System.in);
+
         System.out.println("O que deseja fazer?\n[1] Alterar valor de Ativo\n[2] Registrar Ação \n[3] Excluir Ação\n[4] Ver Ações\n[5] Encerrar Sessão");
         int opc = s.nextByte();
         switch (opc){
@@ -30,20 +32,22 @@ public class Menus {
             case 4: Encerrar();
         }
     }
-    public static void CRegistrarAcao(){
-Acao a = new Acao();
-a.addAcao();
+    public static void CRegistrarAcao() throws IOException {
+        Acao.addAcao();
     }
     public static void ICompraAcao(){}
     public static void IVendeAcao(){}
-   public static void IVerAcoes(){/*
-       ArvoreBinariaAcoes arvore = new ArvoreBinariaAcoes();
-        System.out.println("Ações na árvore (representação toString):");
-        System.out.println(arvore.toStringAcoes());*/
+   public static void IVerAcoes(){
+       Acao.exibirTodasAcoes();
     }
-    public static void CMudarValorAtivo(){}
-    public static void CExcluiAcao(){}
+    public static void CMudarValorAtivo() throws IOException {
+        Acao.mudarValorAtivo();
+    }
+    public static void CExcluiAcao(){
+        Acao.excluirAcao();
+    }
     public static void Encerrar(){
+        System.out.println("Encerrando pregão");
 System.exit(0);
     }
 }
