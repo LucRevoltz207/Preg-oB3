@@ -1,7 +1,6 @@
 package entity;
 
 public class Endreco {
-
     private Integer Numero_Residencial;
     private String Complemento;
     private String Bairro;
