@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Cadastros {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         CadastroMain();
     }
 
-    public static void CadastroMain() {
+    public static void CadastroMain () throws IOException {
         Scanner scan = new Scanner(System.in);
         System.out.println("Primeiro cadastro");
         System.out.println("Você é um(a): [1] Pessoa [2] Empresa");
@@ -30,7 +30,7 @@ public class Cadastros {
         }
 
 
-    public static void CadastroPessoa(){
+    public static void CadastroPessoa() throws IOException {
         Investidores i = new Investidores();
         System.out.print("Nome: ");
         Scanner value = new Scanner(System.in);
@@ -48,17 +48,26 @@ public class Cadastros {
         i.setEmail(value.nextLine());
         System.out.println("Cadastro Concluido!");
         System.out.println(i);
-        System.out.println("Digite qualquer tecla para avançar");
-        value.next();
 
-
-        try {
-            Menus.MenuInvestidor();//Chama a função que da ao usuario a possibilidade de alterar sua carteira
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+        System.out.println("Digite 1 para avançar ou 2 para reiniciar");
+        int opc1 = value.nextByte();
+        if (opc1==1){
+            try {
+                Carteira.CriarCarteira();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (opc1==2) {
+            CadastroMain();
         }
+        else{
+            System.out.println("Opção inválida");
+        }
+
+
+        Menus.MenuInvestidor();//Chama a função que da ao usuario a possibilidade de alterar sua carteira
     }
-    public static void CadastroCorretora(){
+    public static void CadastroCorretora() throws IOException {
         Corretoras c = new Corretoras();
         System.out.print("Nome: ");
         Scanner value = new Scanner(System.in);
@@ -71,8 +80,21 @@ public class Cadastros {
         c.setRazaoSocial(value.nextLine());
         System.out.println("\nCorretora cadastrada!");
         System.out.println(c);
-        System.out.println("Digite qualquer tecla para avançar");
-        value.next();
+
+        System.out.println("Digite 1 para avançar ou 2 para reiniciar");
+        int opc1 = value.nextByte();
+        if (opc1==1){
+            try {
+                Menus.MenuCorretora();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (opc1==2) {
+            CadastroMain();
+        }
+        else{
+            System.out.println("Opção inválida");
+        }
 
         try {
             Menus.MenuCorretora();//chama a função para que as corretoras possam fazer alterações nas ações

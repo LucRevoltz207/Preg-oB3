@@ -1,18 +1,22 @@
 package entity;
     import jakarta.persistence.*;
 
-
+@Entity (name = "Corretoras")
+@Table
 
 
 public class Corretoras {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+
     private Integer idCorretoras;
-
+    @Column
     private String CNPJ;
-
+    @Column
     private String Nome;
-
+    @Column
     private String RazaoSocial;
-
+    @Column
     private String Telefone;
 
     public Corretoras(Integer idCorretoras, String CNPJ, String nome, String razaoSocial, String telefone) {
@@ -69,8 +73,8 @@ public class Corretoras {
 
     @Override
     public String toString() {
-        return "Dados da Corretora:\n"+
-                "Nome Corretora: "+ Nome +
+        return "Dados da Empresa:\n"+
+                "Nome Empresa: "+ Nome +
                 "\nCNPJ: " + CNPJ +
                 "\nRazao Social: " + RazaoSocial +
                 "\nTelefone: " + Telefone;

@@ -5,6 +5,8 @@ package entity;
         import java.util.Iterator;
         import java.util.List;
         import java.util.Scanner;
+        import jakarta.persistence.*;
+
 
 
 public class Acao {
@@ -24,8 +26,8 @@ public class Acao {
     // Lista para armazenar as ações em heap
     private static List<Acao> listaAcoes = new ArrayList<>();
 
-    public Acao(String ticker, String nomeAcao, Double variacaoValor) {
-        this.idAcao = proximoIdAcao();
+    public Acao(Integer idAcao, String ticker, String nomeAcao, Double variacaoValor,Investidores donoAcao, FII ativo) {
+        this.idAcao = idAcao;
         this.ticker = ticker;
         this.nomeAcao = nomeAcao;
         this.variacaoValor = variacaoValor;
@@ -34,13 +36,16 @@ public class Acao {
 
     }
 
-    public Acao(int id, String ticker, String nomeAcao, double variacaoValor) {
+    public Acao() {
     }
 
     public static void addAcao() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Adicione informações da Ação:");
+        System.out.print("ID da Ação: ");
+        int idAcao = scanner.nextInt();
+        scanner.nextLine(); // Limpa a quebra de linha
 
         System.out.print("Ticker da Ação: ");
         String ticker = scanner.nextLine();
@@ -51,7 +56,8 @@ public class Acao {
         System.out.print("Variação de Valor: ");
         double variacaoValor = scanner.nextDouble();
 
-        Acao acao = new Acao(ticker, nomeAcao, variacaoValor);
+
+        Acao acao = new Acao(idAcao, ticker, nomeAcao, variacaoValor, new Investidores(),new FII());
 
         // Adiciona a ação à lista em heap
         listaAcoes.add(acao);
@@ -61,30 +67,18 @@ public class Acao {
         // Exibe todas as ações adicionadas
         CexibirTodasAcoes();
 
-        // Atualizado: Chama criatxt após adicionar uma nova ação
-        Relatorio.criatxt(listaAcoes);
 
         Menus.MenuCorretora();
     }
 
     // Método para exibir todas as ações adicionadas
-    public static void IexibirTodasAcoes() throws IOException {
+    public static void IexibirTodasAcoes() {
         System.out.println("Ações adicionadas:");
         for (Acao acao : listaAcoes) {
             System.out.println(acao);
         }
         Menus.MenuInvestidor();
 
-    }
-    public static String retornarAcoes() {
-        StringBuilder resultado = new StringBuilder();
-        resultado.append("Ações armazenadas:\n");
-
-        for (Acao acao : listaAcoes) {
-            resultado.append(acao.toString()).append("\n");
-        }
-
-        return resultado.toString();
     }
     public static void CexibirTodasAcoes() {
         System.out.println("Ações adicionadas:");
@@ -96,10 +90,6 @@ public class Acao {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-    private Integer proximoIdAcao() {
-        // Retorna o próximo ID de ação com base na posição na lista + 1
-        return listaAcoes.size() + 1;
     }
     // Método para excluir uma ação com base no ID
     public static void excluirAcao() {
@@ -157,8 +147,8 @@ public class Acao {
     public String toString() {
         return "Ativo " +
                 "\n Id =" + idAcao +
-                "\n Ticker =" + ticker+
-                "\n Nome Acao =" + nomeAcao +
+                "\n Ticker ='" + ticker + '\'' +
+                "\n Nome Acao ='" + nomeAcao + '\'' +
                 "\n Variacao Valor =" + variacaoValor +
                 '\n';
     }
