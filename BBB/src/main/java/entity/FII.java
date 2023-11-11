@@ -1,9 +1,6 @@
 package entity;
 import jakarta.persistence.*;
 
-    @Entity (name = "Investidores")
-    @Table (name = "Investidores")
-
 
 public class FII {
         @Column

@@ -52,7 +52,11 @@ public class Cadastros {
         value.next();
 
 
-        Menus.MenuInvestidor();//Chama a função que da ao usuario a possibilidade de alterar sua carteira
+        try {
+            Menus.MenuInvestidor();//Chama a função que da ao usuario a possibilidade de alterar sua carteira
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
     public static void CadastroCorretora(){
         Corretoras c = new Corretoras();
