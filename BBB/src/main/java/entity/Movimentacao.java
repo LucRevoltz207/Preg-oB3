@@ -4,6 +4,9 @@ import entity.Acao;
 import entity.Corretoras;
 import entity.Investidores;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movimentacao {
 
     private Integer idMovimentacao;
@@ -13,6 +16,7 @@ public class Movimentacao {
     private Investidores investidores;
     private Corretoras idCorretoras;
     private Acao idAcao;
+    private static List<Movimentacao> listaMovimentacoes = new ArrayList<>();
 
     public Movimentacao(Integer idMovimentacao, Double variacaoValor, Integer qtdeMovimentacoes, Integer qtdeAcoes, Investidores investidores, Corretoras idCorretoras, Acao idAcao) {
         this.idMovimentacao = idMovimentacao;
@@ -22,6 +26,12 @@ public class Movimentacao {
         this.investidores = investidores;
         this.idCorretoras = idCorretoras;
         this.idAcao = idAcao;
+    }
+    public static void adicionarMovimentacao(Movimentacao movimentacao) {
+        listaMovimentacoes.add(movimentacao);
+    }
+    public static List<Movimentacao> getListaMovimentacoes() {
+        return listaMovimentacoes;
     }
 
     public Integer getIdMovimentacao() {

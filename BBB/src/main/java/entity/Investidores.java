@@ -1,10 +1,7 @@
 package entity;
 
 
-import jakarta.persistence.*;
-
-
-
+import java.util.LinkedList;
 
 
 public class Investidores {
@@ -22,9 +19,10 @@ public class Investidores {
     private String Telefone;
 
     private String Email;
-    private Double Cash;
+    private Carteira Carteira;
 
-    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Double cash) {
+
+    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Carteira carteira) {
         this.id_investidor = id_investidor;
         Nome = nome;
         this.CPF = CPF;
@@ -32,14 +30,17 @@ public class Investidores {
         Senha = senha;
         Telefone = telefone;
         Email = email;
-        Cash = cash;
+        Carteira = carteira;
+
     }
 
+LinkedList Investidores = new LinkedList<>();
 
 
     public Investidores() {
 
     }
+
 
     public Integer getId_investidor() {
         return id_investidor;
@@ -67,6 +68,22 @@ public class Investidores {
 
     public String getNomeUsuario() {
         return NomeUsuario;
+    }
+
+    public entity.Carteira getCarteira() {
+        return Carteira;
+    }
+
+    public void setCarteira(entity.Carteira carteira) {
+        Carteira = carteira;
+    }
+
+    public LinkedList getInvestidores() {
+        return Investidores;
+    }
+
+    public void setInvestidores(LinkedList investidores) {
+        Investidores = investidores;
     }
 
     public void setNomeUsuario(String nomeUsuario) {
@@ -97,21 +114,15 @@ public class Investidores {
         Email = email;
     }
 
-    public Double getCash() {
-        return Cash;
-    }
-
-    public void setCash(Double cash) {
-        Cash = cash;
-    }
-
-    @Override
-    public String toString() {
-        return "Dados:\n" +
-                "\nNome " + Nome +
-                "\nCPF: " + CPF +
-                "\nNome de usuário: " + NomeUsuario +
-                "\nTelefone:  " + Telefone +
-                "\nEmail: " + Email ;
+    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, entity.Carteira carteira, LinkedList investidores) {
+        this.id_investidor = id_investidor;
+        Nome = nome;
+        this.CPF = CPF;
+        NomeUsuario = nomeUsuario;
+        Senha = senha;
+        Telefone = telefone;
+        Email = email;
+        Carteira = carteira;
+        Investidores = investidores;
     }
 }

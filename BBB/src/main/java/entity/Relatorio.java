@@ -15,7 +15,7 @@ public class Relatorio {
     private static final String NOME_ARQUIVO_ACOES = "Acoes.txt";
     private static int status = 0;
     public static void criatxt(List<Acao> listaAcoes) throws IOException {
-        System.out.println("¬");
+
 
 
         Path path = Path.of(DIRETORIO_ACOES, NOME_ARQUIVO_ACOES);
@@ -41,7 +41,6 @@ public class Relatorio {
             Files.writeString(path,texto);
         }
 
-        System.out.println(status);
     }
 
     public static void relatorioAcoes(List<Acao> listaAcoes) {
