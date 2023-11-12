@@ -20,21 +20,59 @@ public class Acao {
 
     private Investidores DonoAcao;
     private FII Ativo;
+    private Carteira Carteira;
 
     // Lista para armazenar as ações em heap
     private static List<Acao> listaAcoes = new ArrayList<>();
 
-    public Acao(String ticker, String nomeAcao, Double variacaoValor) {
+    public Acao(String ticker, String nomeAcao, Double variacaoValor ,Carteira carteira) {
         this.idAcao = proximoIdAcao();
         this.ticker = ticker;
         this.nomeAcao = nomeAcao;
         this.variacaoValor = variacaoValor;
         this.DonoAcao = null;
         this.Ativo = null;
+        this.Carteira = carteira;
 
     }
 
-    public Acao(int id, String ticker, String nomeAcao, double variacaoValor) {
+    public void comprarAcao(Investidores investidor) {
+        // Verificar se o investidor possui saldo suficiente na carteira
+        if (investidor.getCarteira().getSaldo() >= this.variacaoValor) {
+            // Realizar a compra
+            investidor.getCarteira().getAcoesInvestidor().add(this);
+            investidor.getCarteira().setSaldo(investidor.getCarteira().getSaldo() - this.variacaoValor);
+
+            // Adicionar movimentação
+            Movimentacao movimentacao = new Movimentacao(proximoIdMovimentacao(), this.variacaoValor, 1, 1, investidor, null, this);
+            Movimentacao.adicionarMovimentacao(movimentacao);
+
+            System.out.println("Ação comprada com sucesso!");
+        } else {
+            System.out.println("Saldo insuficiente para comprar esta ação.");
+        }
+    }
+    public void venderAcao(Investidores investidor) {
+        // Verificar se o investidor possui a ação na carteira
+        if (investidor.getCarteira().getAcoesInvestidor().contains(this)) {
+            // Realizar a venda
+            investidor.getCarteira().getAcoesInvestidor().remove(this);
+            investidor.getCarteira().setSaldo(investidor.getCarteira().getSaldo() + this.variacaoValor);
+
+            // Adicionar movimentação
+            Movimentacao movimentacao = new Movimentacao(proximoIdMovimentacao(), this.variacaoValor, 1, 1, investidor, null, this);
+           Movimentacao.adicionarMovimentacao(movimentacao);
+
+            System.out.println("Ação vendida com sucesso!");
+        } else {
+            System.out.println("O investidor não possui esta ação na carteira.");
+        }
+    }
+    public static Integer proximoIdMovimentacao(){
+        return Movimentacao.getListaMovimentacoes().size()+1;
+    }
+
+    public Acao(String ticker, String nomeAcao, double variacaoValor) {
     }
 
     public Acao() {
@@ -232,5 +270,13 @@ public class Acao {
 
     public void setAtivo(FII ativo) {
         Ativo = ativo;
+    }
+
+    public entity.Carteira getCarteira() {
+        return Carteira;
+    }
+
+    public void setCarteira(entity.Carteira carteira) {
+        Carteira = carteira;
     }
 }

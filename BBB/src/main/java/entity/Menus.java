@@ -12,7 +12,7 @@ public class Menus {
     public static void MenuCorretora() throws IOException {
         Scanner s = new Scanner(System.in);
 
-        System.out.println("O que deseja fazer?\n[1] Alterar valor de Ativo\n[2] Registrar Ação \n[3] Excluir Ação\n[4] Ver Ações\n[5] Encerrar Sessão");
+        System.out.println("O que deseja fazer?\n[1] Alterar valor de Ativo\n[2] Registrar Ação \n[3] Excluir Ação\n[4] Ver Ações\n[5] Encerrar Sessão\n[6] Menu investidor");
         int opc = s.nextByte();
         switch (opc){
             case 1: CMudarValorAtivo();break;
@@ -20,6 +20,10 @@ public class Menus {
             case 3: CExcluiAcao();break;
             case 4: CVerAcoes();break;
             case 5: Encerrar();break;
+            case 6: MenuInvestidor();break;
+            default:
+                System.out.println("opção invalida");
+                MenuCorretora();
         }
 
     }
@@ -32,13 +36,20 @@ public class Menus {
             case 2: IVendeAcao();break;
             case 3: IVerAcoes();break;
             case 4: Encerrar();break;
+            default:
+                System.out.println("opção invalida");
+                MenuInvestidor();break;
         }
     }
     public static void CRegistrarAcao() throws IOException {
         Acao.addAcao();
     }
-    public static void ICompraAcao(){}
-    public static void IVendeAcao(){}
+    public static void ICompraAcao(){
+
+    }
+    public static void IVendeAcao(){
+
+    }
    public static void IVerAcoes() throws IOException {
        Acao.IexibirTodasAcoes();
     }
