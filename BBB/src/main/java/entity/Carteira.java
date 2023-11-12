@@ -7,12 +7,12 @@ import java.util.Scanner;
 
 public class Carteira  {
     private double saldo;
-    ArrayList<Acao> acoes = new ArrayList<>();
+    ArrayList<Acao> acoesinvestidor = new ArrayList<>();
 
 
     public Carteira(double saldo, ArrayList<Acao> acoes) {
         this.saldo = saldo;
-        this.acoes = acoes;
+        this.acoesinvestidor = acoes;
     }
 
     public double getSaldo() {
@@ -24,18 +24,18 @@ public class Carteira  {
     }
 
     public ArrayList<Acao> getAcoes() {
-        return acoes;
+        return acoesinvestidor;
     }
 
     public void setAcoes(ArrayList<Acao> acoes) {
-        this.acoes = acoes;
+        this.acoesinvestidor = acoes;
     }
 
     @Override
     public String toString() {
         return "Carteira{" +
                 "saldo=" + saldo +
-                ", acoes=" + acoes +
+                ", acoes=" + acoesinvestidor +
                 '}';
     }
 

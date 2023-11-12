@@ -4,23 +4,27 @@ package entity;
 import jakarta.persistence.*;
 
 
+
+
+
 public class Investidores {
 
     private Integer id_investidor;
-    @Column
-    private String Nome;
-    @Column
-    private String CPF;
-    @Column
-    private String NomeUsuario;
-    @Column
-    private String Senha;
-    @Column
-    private String Telefone;
-    @Column
-    private String Email;
 
-    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email) {
+    private String Nome;
+
+    private String CPF;
+
+    private String NomeUsuario;
+
+    private String Senha;
+
+    private String Telefone;
+
+    private String Email;
+    private Double Cash;
+
+    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Double cash) {
         this.id_investidor = id_investidor;
         Nome = nome;
         this.CPF = CPF;
@@ -28,7 +32,10 @@ public class Investidores {
         Senha = senha;
         Telefone = telefone;
         Email = email;
+        Cash = cash;
     }
+
+
 
     public Investidores() {
 
@@ -90,9 +97,17 @@ public class Investidores {
         Email = email;
     }
 
+    public Double getCash() {
+        return Cash;
+    }
+
+    public void setCash(Double cash) {
+        Cash = cash;
+    }
+
     @Override
     public String toString() {
-        return "Seus dados foram definidos assim:\n" +
+        return "Dados:\n" +
                 "\nNome " + Nome +
                 "\nCPF: " + CPF +
                 "\nNome de usuário: " + NomeUsuario +

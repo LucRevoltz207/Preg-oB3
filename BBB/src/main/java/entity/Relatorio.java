@@ -3,30 +3,51 @@ package entity;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+import java.io.BufferedWriter;
+import java.nio.file.StandardOpenOption;
 
 public class Relatorio {
 
-        public static void criatxt(String texto) throws IOException {
-            Acao a = new Acao();
-            Path path = Path.of("C:\\teste\\acao" + a.getIdAcao() + ".txt");
-            if(Files.notExists(path)){
-                Files.createFile(path);
-            }
 
-            Files.writeString(path, texto);
+    private static final String DIRETORIO_ACOES = "C:\\teste";
+    private static final String NOME_ARQUIVO_ACOES = "Acoes.txt";
+    private static int status = 0;
+    public static void criatxt(List<Acao> listaAcoes) throws IOException {
+        System.out.println("¬");
 
 
+        Path path = Path.of(DIRETORIO_ACOES, NOME_ARQUIVO_ACOES);
+
+
+        // Cria o diretório se não existir
+        if (Files.notExists(Path.of(DIRETORIO_ACOES))) {
+            Files.createDirectories(Path.of(DIRETORIO_ACOES));
         }
 
-        public static void RelatorioAcoes(){
-
-        }
-        public static void RelatorioCarteira(){
-
-        }
-        public static void RelatorioCompra(){
-
+        // Cria o arquivo se não existir
+        if (Files.notExists(path)) {
+            Files.createFile(path);
         }
 
+        for (status = status; status < 1; status++) {
+            LeitorArquivo.lerArquivo("C:\\teste\\Acoes.txt", listaAcoes);
+        }
+
+
+        for (Acao acao : listaAcoes) {
+            String texto = acao.retornarAcoes();
+            Files.writeString(path,texto);
+        }
+
+        System.out.println(status);
     }
 
+    public static void relatorioAcoes(List<Acao> listaAcoes) {
+        System.out.println("Relatório de Ações:");
+        for (Acao acao : listaAcoes) {
+            System.out.println(acao);
+        }
+    }
+}

@@ -29,7 +29,6 @@
         <mapping class="entity.Investidores" />
         <mapping class="entity.Corretoras" />
         <mapping class="entity.FII" />
-        <mapping class="entity.Carteira" />
 
 
 
