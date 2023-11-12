@@ -7,13 +7,9 @@ import java.util.Scanner;
 
 public class Carteira  {
     private double saldo;
-    ArrayList<Acao> acoesinvestidor = new ArrayList<>();
+    private ArrayList<Acao> acoesInvestidor = new ArrayList<>();
 
 
-    public Carteira(double saldo, ArrayList<Acao> acoes) {
-        this.saldo = saldo;
-        this.acoesinvestidor = acoes;
-    }
 
     public double getSaldo() {
         return saldo;
@@ -23,21 +19,8 @@ public class Carteira  {
         this.saldo = saldo;
     }
 
-    public ArrayList<Acao> getAcoes() {
-        return acoesinvestidor;
-    }
 
-    public void setAcoes(ArrayList<Acao> acoes) {
-        this.acoesinvestidor = acoes;
-    }
 
-    @Override
-    public String toString() {
-        return "Carteira{" +
-                "saldo=" + saldo +
-                ", acoes=" + acoesinvestidor +
-                '}';
-    }
 
     public static void CriarCarteira() throws IOException{
         double saldo;
@@ -50,5 +33,20 @@ public class Carteira  {
         Menus.MenuInvestidor();
 
     }
+    public void adicionarAcao(Acao acao) {
 
+    }
+
+    public ArrayList<Acao> getAcoesInvestidor() {
+        return acoesInvestidor;
+    }
+
+    public void setAcoesInvestidor(ArrayList<Acao> acoesInvestidor) {
+        this.acoesInvestidor = acoesInvestidor;
+    }
+
+    public Carteira(double saldo, ArrayList<Acao> acoesInvestidor) {
+        this.saldo = saldo;
+        this.acoesInvestidor = acoesInvestidor;
+    }
 }
