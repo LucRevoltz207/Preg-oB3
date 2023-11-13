@@ -11,3 +11,6 @@ Este código simula um pregão da bolsa de valores, onde as empresas e clientes 
 # API's utilizadas 
 - github
 - inteliji 
+
+# Link video apresentação
+https://youtube.com/@LucasMouraaa?feature=shared
