@@ -51,7 +51,7 @@ public class LeitorArquivo {
             } else if (linha.startsWith("Valor")) {
                 // Extrai o valor da linha e define na ação atual
                 double valor = extrairValorDouble(linha);
-                acaoAtual.setVariacaoValor(valor);
+                acaoAtual.setVariacaoValor((float) valor);
             }
         }
 

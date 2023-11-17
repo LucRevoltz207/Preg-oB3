@@ -35,13 +35,14 @@ public class Menus {
             case 3: IAcoesCompradas();break;
             case 4: IVerAcoes();break;
             case 5: Encerrar();break;
-            case 6: IAddSaldo();break;
+//            case 6: IAddSaldo();break;
         }
     }
 
-    public static void IAddSaldo(){
-
-    }
+//    public static void IAddSaldo(){
+//        System.out.println("Dig");
+//
+//    }
     public static void IAcoesCompradas(){
         System.out.println(Acao.acoesinvestidor);
         try {

@@ -32,8 +32,10 @@ public class Cadastros {
 
     public static void CadastroPessoa(){
         Investidores i = new Investidores();
-        System.out.print("Nome: ");
         Scanner value = new Scanner(System.in);
+
+
+        System.out.print("Nome: ");
         i.setNome(value.nextLine());
         System.out.print("Defina um nome de usuário :");
         i.setNomeUsuario(value.nextLine());
@@ -46,6 +48,8 @@ public class Cadastros {
         i.setTelefone(value.nextLine());
         System.out.print("Digite seu melhor email: ");
         i.setEmail(value.nextLine());
+
+
         System.out.println("Cadastro Concluido!");
         System.out.println(i);
         System.out.println("Digite qualquer tecla para avançar");
@@ -60,6 +64,7 @@ public class Cadastros {
     }
     public static void CadastroCorretora(){
         Corretoras c = new Corretoras();
+
         System.out.print("Nome: ");
         Scanner value = new Scanner(System.in);
         c.setNome(value.nextLine());

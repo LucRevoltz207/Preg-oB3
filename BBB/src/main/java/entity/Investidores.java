@@ -39,11 +39,6 @@ public class Investidores {
         this.saldo = saldo;
     }
 
-
-
-
-
-
     public Investidores() {
 
     }

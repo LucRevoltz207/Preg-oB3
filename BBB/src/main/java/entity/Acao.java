@@ -67,10 +67,16 @@ public class Acao {
                 }
                 break;
             }
+
         }
 
         if (!encontrou) {
             System.out.println("Ação não encontrada com o ticker informado na lista do investidor.");
+            try {
+                Menus.MenuInvestidor();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -100,6 +106,9 @@ public static void acoesiniciais(){
 }
     public static void comprarAcoes(List<Acao> listaAcoes, List<Acao> acoesinvestidor, Investidores i) throws IOException {
         Scanner scan = new Scanner(System.in);
+
+        System.out.println("Digite o saldo que deseja depositar: ");
+        i.setSaldo(scan.nextDouble());
 
         System.out.println("Digite o ticker da ação que deseja comprar: ");
         String tick = scan.next();
