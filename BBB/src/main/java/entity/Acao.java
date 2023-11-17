@@ -16,31 +16,150 @@ public class Acao {
 
     private String nomeAcao;
 
-    private Double variacaoValor;
+    private float variacaoValor;
 
-    private Investidores DonoAcao;
-    private FII Ativo;
 
     // Lista para armazenar as ações em heap
-    private static List<Acao> listaAcoes = new ArrayList<>();
+    static List<Acao> listaAcoes = new ArrayList<>();
+    static ArrayList<Acao> acoesinvestidor = new ArrayList<>();//carteira logica
 
-    public Acao(String ticker, String nomeAcao, Double variacaoValor) {
-        this.idAcao = proximoIdAcao();
+
+    public Acao(String ticker, String nomeAcao, float variacaoValor) {
+
         this.ticker = ticker;
         this.nomeAcao = nomeAcao;
         this.variacaoValor = variacaoValor;
-        this.DonoAcao = null;
-        this.Ativo = null;
+
 
     }
 
-    public Acao(int id, String ticker, String nomeAcao, double variacaoValor) {
-    }
 
     public Acao() {
 
     }
+    public static void venderAcoes(List<Acao> listaAcoes, List<Acao> acoesInvestidor) {
+        Scanner scan = new Scanner(System.in);
 
+        System.out.println("Digite o ticker da ação que deseja vender: ");
+        String tick = scan.next();
+
+        Iterator<Acao> iterator = acoesInvestidor.iterator();
+        boolean encontrou = false;
+
+        while (iterator.hasNext()) {
+            Acao acao = iterator.next();
+            if (acao.getTicker().equals(tick)) {
+                listaAcoes.add(acao); // Adiciona a ação de volta à lista de todas as ações
+                iterator.remove(); // Remove a ação da lista do investidor
+                try {
+                    Relatorio.criatxt(listaAcoes);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                encontrou = true;
+                System.out.println("Ação vendida!");
+                Relatorio.CriatxtCompradas();
+
+                try {
+                    Menus.MenuInvestidor();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                break;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Ação não encontrada com o ticker informado na lista do investidor.");
+        }
+    }
+
+public static void acoesiniciais(){
+    Acao a1 = new Acao("NTCO3", "Natura", 13.91F);
+    Acao a2 = new Acao("CRFB3", "Carrefour", 10.54F);
+    Acao a3 = new Acao("BBDC4", "Bradesco", 15.04F);
+    Acao a4 = new Acao("PETR4", "Petrobras", 34.72F);
+    Acao a5 = new Acao("ELET3", "Eletrobras", 40.71F);
+    Acao a6 = new Acao ("AMAR3", "Marisa", 3.36F);
+    Acao a7 = new Acao ("VALE3", "Vale", 74.11F);
+    Acao a8 = new Acao ("BBSE3", "BB Seguridade", 32.14F);
+    Acao a9 = new Acao ("BBAS3", "Banco Do Brasil", 50.37F);
+    Acao a10 = new Acao("MXRF11", "Maxi Renda", 10.90F);
+
+
+    listaAcoes.add(a1);
+    listaAcoes.add(a2);
+    listaAcoes.add(a3);
+    listaAcoes.add(a4);
+    listaAcoes.add(a5);
+    listaAcoes.add(a6);
+    listaAcoes.add(a7);
+    listaAcoes.add(a8);
+    listaAcoes.add(a9);
+    listaAcoes.add(a10);
+}
+    public static void comprarAcoes(List<Acao> listaAcoes, List<Acao> acoesinvestidor, Investidores i) throws IOException {
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("Digite o ticker da ação que deseja comprar: ");
+        String tick = scan.next();
+
+        System.out.println("Digite a quantidade de ações desse ticker: ");
+        int qtd= scan.nextInt();
+
+        double precoTotal;
+        double precoFinal;
+
+        for (Acao acao : listaAcoes)
+        {
+            if (acao.getTicker().equals(tick)){
+                precoTotal = qtd * acao.getVariacaoValor();
+                if(precoTotal <= i.getSaldo()) {
+                    System.out.println("Saldo suficiente!");
+                    System.out.println("\nVocê adquiriu " + qtd + " ações " + acao.nomeAcao+" valor final, em R$: " + precoTotal);
+
+                    precoFinal = i.getSaldo() - precoTotal;
+                    i.setSaldo(precoFinal);
+
+                    System.out.println("Você ainda possuí: R$ " + precoFinal);
+
+                    Menus.MenuInvestidor();
+                    Relatorio.CriatxtCompradas();
+                }
+
+            }
+            else {
+                System.out.println("\nSaldo insuficiente!!");
+                Menus.MenuInvestidor();
+            }
+        }
+
+        Iterator<Acao> iterator = listaAcoes.iterator();
+        boolean encontrou = false;
+
+        while (iterator.hasNext()) {
+            Acao acao = iterator.next();
+            if (acao.getTicker().equals(tick)) {
+                // Remover a ação da lista de todas as ações com o ticker correspondente
+                iterator.remove();
+
+                // Adicionar a ação à lista do investidor
+                acoesinvestidor.add(acao);
+
+
+                encontrou = true;
+                System.out.println("Ação comprada!");
+                Relatorio.criatxt(listaAcoes);
+                Menus.MenuInvestidor();
+                break;
+            }
+        }
+
+        if (!encontrou) {
+            System.out.println("Ação não encontrada com o ticker informado.");
+            Menus.MenuInvestidor();
+        }
+    }
     public static void addAcao() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
@@ -53,7 +172,7 @@ public class Acao {
         String nomeAcao = scanner.nextLine();
 
         System.out.print("Variação de Valor: ");
-        double variacaoValor = scanner.nextDouble();
+        Float variacaoValor = scanner.nextFloat();
 
         Acao acao = new Acao(ticker, nomeAcao, variacaoValor);
 
@@ -69,6 +188,7 @@ public class Acao {
 
 
         Menus.MenuCorretora();
+        Relatorio.criatxt(listaAcoes);
     }
 
     // Método para exibir todas as ações adicionadas
@@ -80,11 +200,31 @@ public class Acao {
         Menus.MenuInvestidor();
 
     }
+
+
+    public ArrayList<Acao> getAcoesinvestidor() {
+        return acoesinvestidor;
+    }
+
+    public void setAcoesinvestidor(ArrayList<Acao> acoesinvestidor) {
+        this.acoesinvestidor = acoesinvestidor;
+    }
+
     public static String retornarAcoes() {
         StringBuilder resultado = new StringBuilder();
         resultado.append("Ações armazenadas:\n");
 
         for (Acao acao : listaAcoes) {
+            resultado.append(acao.toString()).append("\n");
+        }
+
+        return resultado.toString();
+    }
+    public static String retornarAcoescompradas() {
+        StringBuilder resultado = new StringBuilder();
+        resultado.append("Ações armazenadas:\n");
+
+        for (Acao acao : acoesinvestidor) {
             resultado.append(acao.toString()).append("\n");
         }
 
@@ -101,82 +241,83 @@ public class Acao {
             throw new RuntimeException(e);
         }
     }
-    private Integer proximoIdAcao() {
-        // Retorna o próximo ID de ação com base na posição na lista + 1
-        return listaAcoes.size() + 1;
-    }
-    // Método para excluir uma ação com base no ID
+
+    // Método para excluir uma ação com base no ticker
+
     public static void excluirAcao() {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Informe o ID da Ação a ser excluída: ");
-        int idAcaoParaExcluir = scanner.nextInt();
+        System.out.print("Informe o ticker da Ação a ser excluída: ");
+        String tickParaExcluir = scanner.next();
 
         Iterator<Acao> iterator = listaAcoes.iterator();
         boolean encontrou = false;
 
         while (iterator.hasNext()) {
             Acao acao = iterator.next();
-            if (acao.getIdAcao().equals(idAcaoParaExcluir)) {
+            if (acao.getTicker().equals(tickParaExcluir)) {
                 iterator.remove();
                 encontrou = true;
                 System.out.println("Ação excluída com sucesso!");
+                try {
+                    Relatorio.criatxt(listaAcoes);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                try {
+                    Menus.MenuCorretora();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
                 break;
             }
         }
 
         if (!encontrou) {
-            System.out.println("Ação não encontrada com o ID informado.");
+            System.out.println("Ação não encontrada com o ticker informado.");
+            try {
+                Menus.MenuCorretora();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
-        try {
-            Relatorio.criatxt(listaAcoes);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
-            Menus.MenuCorretora();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
     }
+
     public static void mudarValorAtivo() throws IOException {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Informe o ID da Ação cujo valor deve ser alterado: ");
-        int idAcaoParaAlterar = scanner.nextInt();
+        System.out.print("Informe o ticker da Ação cujo valor deve ser alterado: ");
+        String tickParaAlterar = scanner.next();
 
         Iterator<Acao> iterator = listaAcoes.iterator();
         boolean encontrou = false;
 
         while (iterator.hasNext()) {
             Acao acao = iterator.next();
-            if (acao.getIdAcao().equals(idAcaoParaAlterar)) {
+            if (acao.getTicker().equals(tickParaAlterar)) {
                 System.out.print("Informe o novo valor para a Ação: ");
-                double novoValor = scanner.nextDouble();
+                float novoValor = scanner.nextFloat();
                 acao.setVariacaoValor(novoValor);
                 encontrou = true;
                 System.out.println("Valor da Ação alterado com sucesso!");
+                Relatorio.criatxt(listaAcoes);
+                Menus.MenuCorretora();
                 break;
             }
         }
-        try {
-            Relatorio.criatxt(listaAcoes);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Menus.MenuCorretora();
     }
+
 
         @Override
     public String toString() {
-        return "Ativo " +
-                "\n Id =" + idAcao +
-                "\n Ticker =" + ticker+
-                "\n Nome Acao =" + nomeAcao +
-                "\n Valor =" + variacaoValor +
+        return "Ativo: " +
+                "\n Ticker = " + ticker+
+                "\n Nome Acao = " + nomeAcao +
+                "\n Valor = " + variacaoValor +
                 '\n';
     }
+
+
 
     public Integer getIdAcao() {
         return idAcao;
@@ -202,11 +343,11 @@ public class Acao {
         this.nomeAcao = nomeAcao;
     }
 
-    public Double getVariacaoValor() {
+    public Float getVariacaoValor() {
         return variacaoValor;
     }
 
-    public void setVariacaoValor(Double variacaoValor) {
+    public void setVariacaoValor(Float variacaoValor) {
         this.variacaoValor = variacaoValor;
     }
 
@@ -218,19 +359,7 @@ public class Acao {
         Acao.listaAcoes = listaAcoes;
     }
 
-    public Investidores getDonoAcao() {
-        return DonoAcao;
-    }
 
-    public void setDonoAcao(Investidores donoAcao) {
-        DonoAcao = donoAcao;
-    }
 
-    public FII getAtivo() {
-        return Ativo;
-    }
 
-    public void setAtivo(FII ativo) {
-        Ativo = ativo;
-    }
 }

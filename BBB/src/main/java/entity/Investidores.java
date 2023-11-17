@@ -3,8 +3,10 @@ package entity;
 
 import jakarta.persistence.*;
 
-
-
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 
 public class Investidores {
@@ -23,8 +25,9 @@ public class Investidores {
 
     private String Email;
     private Double Cash;
+    private double saldo;
 
-    public Investidores(Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Double cash) {
+    public Investidores(double saldo, Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Double cash) {
         this.id_investidor = id_investidor;
         Nome = nome;
         this.CPF = CPF;
@@ -33,12 +36,33 @@ public class Investidores {
         Telefone = telefone;
         Email = email;
         Cash = cash;
+        this.saldo = saldo;
     }
+
+
+
 
 
 
     public Investidores() {
 
+    }
+    public void addSaldo(){
+        System.out.println("Quanto deseja adicionar a carteira: ");
+        Scanner s = new Scanner(System.in);
+        double saldinho = s.nextDouble();
+        double Saldo =+ saldinho;
+
+        setSaldo(Saldo);
+
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
     }
 
     public Integer getId_investidor() {
@@ -112,6 +136,7 @@ public class Investidores {
                 "\nCPF: " + CPF +
                 "\nNome de usuário: " + NomeUsuario +
                 "\nTelefone:  " + Telefone +
-                "\nEmail: " + Email ;
+                "\nEmail: " + Email +
+                "\nSaldo: R$ " + saldo;
     }
 }
