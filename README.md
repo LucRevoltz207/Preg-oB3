@@ -13,4 +13,4 @@ Este código simula um pregão da bolsa de valores, onde as empresas e clientes 
 - inteliji 
 
 # Link video apresentação
-https://youtube.com/@LucasMouraaa?feature=shared
+[https://youtube.com/@LucasMouraaa?feature=shared](https://drive.google.com/file/d/1-2yjmYQkLZyHwslrRRs2OkdxKHHX-sRt/view?usp=sharing)https://drive.google.com/file/d/1-2yjmYQkLZyHwslrRRs2OkdxKHHX-sRt/view?usp=sharing
