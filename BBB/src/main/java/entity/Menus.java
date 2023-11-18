@@ -49,13 +49,19 @@ public class Menus {
             case 2: CRegistrarAcao();break;
             case 3: CExcluiAcao();break;
             case 4: CVerAcoes();break;
-            case 5: MenuInvestidor();break;
+            case 5:Investidores.addSaldo();
+                MenuInvestidor();break;
             case 6: Encerrar();break;
         }
     }
 
     public static void IAcoesCompradas(){
-        Acao.retornarAcoescompradas();
+        System.out.println( Acao.retornarAcoescompradas());
+        try {
+            Menus.MenuInvestidor();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
@@ -66,7 +72,7 @@ public class Menus {
 
     public static void ICompraAcao(){
         try {
-            Acao.comprarAcoes(Acao.listaAcoes, Acao.acoesinvestidor, new Investidores());
+            Acao.comprarAcoes( new Investidores());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
