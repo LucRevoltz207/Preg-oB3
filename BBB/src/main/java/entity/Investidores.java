@@ -1,15 +1,31 @@
 package entity;
 
 
-import jakarta.persistence.*;
-
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 
 public class Investidores {
+
+
+    //metodo para adicionar saldo á carteira do usuário
+    public static void addSaldo() {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Saldo para adicionar à carteira: ");
+        double valorAdicionado = scanner.nextDouble();
+
+        // Verificar se o valor inserido é não negativo antes de atualizar o saldo
+        if (valorAdicionado > 0) {
+            saldo += valorAdicionado; // Adicionar o valor inserido ao saldo
+            System.out.println("Saldo atualizado: " + saldo);
+        }
+        else {
+
+            System.out.println("Valor inválido. O saldo não foi atualizado.");
+            addSaldo();
+        }
+    }
 
     private Integer id_investidor;
 
@@ -25,9 +41,9 @@ public class Investidores {
 
     private String Email;
     private Double Cash;
-    private double saldo;
+    private static Double saldo = 0.0;
 
-    public Investidores(double saldo, Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Double cash) {
+    public Investidores(Double saldo, Integer id_investidor, String nome, String CPF, String nomeUsuario, String senha, String telefone, String email, Double cash) {
         this.id_investidor = id_investidor;
         Nome = nome;
         this.CPF = CPF;
@@ -39,18 +55,10 @@ public class Investidores {
         this.saldo = saldo;
     }
 
-    public Investidores() {
 
-    }
-    public void addSaldo(){
-        System.out.println("Quanto deseja adicionar a carteira: ");
-        Scanner s = new Scanner(System.in);
-        double saldinho = s.nextDouble();
-        double Saldo =+ saldinho;
+    public Investidores() {}
 
-        setSaldo(Saldo);
 
-    }
 
     public double getSaldo() {
         return saldo;
@@ -126,12 +134,13 @@ public class Investidores {
 
     @Override
     public String toString() {
-        return "Dados:\n" +
+        return "Dados:" +
                 "\nNome " + Nome +
                 "\nCPF: " + CPF +
                 "\nNome de usuário: " + NomeUsuario +
                 "\nTelefone:  " + Telefone +
-                "\nEmail: " + Email +
-                "\nSaldo: R$ " + saldo;
+                "\nEmail: " + Email+
+                "\nSaldo: R$ " + saldo+
+                "\n";
     }
 }

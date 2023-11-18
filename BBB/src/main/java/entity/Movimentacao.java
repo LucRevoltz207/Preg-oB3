@@ -82,14 +82,14 @@ public class Movimentacao {
 
     @Override
     public String toString() {
-        return "Movimentacao{" +
-                "idMovimentacao=" + idMovimentacao +
-                ", VariacaoValor=" + VariacaoValor +
-                ", QtdeMovimentacoes=" + QtdeMovimentacoes +
-                ", QtdeAcoes=" + QtdeAcoes +
-                ", investidores=" + investidores +
-                ", idCorretoras=" + idCorretoras +
-                ", idAcao=" + idAcao +
+        return "Movimentacao:" +
+                "\n Id movimentação: " + idMovimentacao +
+                "\n Valor: " + VariacaoValor +
+                "\n Quantidade de movimentações: " + QtdeMovimentacoes +
+                "\n Quantidade de ações: " + QtdeAcoes +
+                "\n Investidor: " + investidores +
+                "\n Id corretora: " + idCorretoras +
+                "\n Id corretora: " + idAcao +
                 '}';
     }
 }
